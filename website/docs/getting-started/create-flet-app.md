@@ -175,7 +175,7 @@ def main(page: ft.Page):
     )
     page.add(ft.Text("Body content goes here"))
 
-ft.run(main)
+ft.app(main)
 ```
 
 `page.theme` and `page.theme_mode` control the color scheme (light/dark and a seed color) applied across all
@@ -194,13 +194,17 @@ Interactive controls like [`Button`](../controls/button.md), [`IconButton`](../c
 with the control:
 
 ```python
+import flet as ft
+
 def main(page: ft.Page):
-    def handle_click(e: ft.Event[ft.Button]):
-        page.show_dialog(ft.SnackBar(ft.Text("Button clicked!")))
+    # Type definition updated as ft.ControlEvent
+    def handle_click(e: ft.ControlEvent):
+        # Current method to show SnackBar page.open()
+        page.open(ft.SnackBar(ft.Text("Button clicked!")))
 
-    page.add(ft.Button("Click me", on_click=handle_click))
+    page.add(ft.ElevatedButton("Click me", on_click=handle_click))
 
-ft.run(main)
+ft.app(main)
 ```
 
 Every event handler takes a single argument, conventionally named `e`, of type [`Event`](/docs/types/event).
